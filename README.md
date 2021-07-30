@@ -84,25 +84,19 @@ Coeficient de correlation pour toutes les variables numeriques
 <thead>
 <tr>
 <th style="text-align:left;">
-col\_1
+Variable 1
 </th>
 <th style="text-align:left;">
-col\_2
+Variable 2
 </th>
 <th style="text-align:right;">
-corr
+Correlation
 </th>
 <th style="text-align:right;">
-p\_value
+Valeur P
 </th>
 <th style="text-align:right;">
-lower
-</th>
-<th style="text-align:right;">
-upper
-</th>
-<th style="text-align:right;">
-pcnt\_nna
+N-NA (%)
 </th>
 </tr>
 </thead>
@@ -118,13 +112,7 @@ Petal.Length
 0.96
 </td>
 <td style="text-align:right;">
-0.000000
-</td>
-<td style="text-align:right;">
-0.95
-</td>
-<td style="text-align:right;">
-0.97
+0.000
 </td>
 <td style="text-align:right;">
 100
@@ -141,13 +129,7 @@ Sepal.Length
 0.87
 </td>
 <td style="text-align:right;">
-0.000000
-</td>
-<td style="text-align:right;">
-0.83
-</td>
-<td style="text-align:right;">
-0.91
+0.000
 </td>
 <td style="text-align:right;">
 100
@@ -164,13 +146,7 @@ Sepal.Length
 0.82
 </td>
 <td style="text-align:right;">
-0.000000
-</td>
-<td style="text-align:right;">
-0.76
-</td>
-<td style="text-align:right;">
-0.86
+0.000
 </td>
 <td style="text-align:right;">
 100
@@ -187,13 +163,7 @@ Sepal.Width
 -0.43
 </td>
 <td style="text-align:right;">
-0.000000
-</td>
-<td style="text-align:right;">
--0.55
-</td>
-<td style="text-align:right;">
--0.29
+0.000
 </td>
 <td style="text-align:right;">
 100
@@ -210,13 +180,7 @@ Sepal.Width
 -0.37
 </td>
 <td style="text-align:right;">
-0.000009
-</td>
-<td style="text-align:right;">
--0.50
-</td>
-<td style="text-align:right;">
--0.22
+0.000
 </td>
 <td style="text-align:right;">
 100
@@ -233,13 +197,7 @@ Sepal.Length
 -0.12
 </td>
 <td style="text-align:right;">
-0.154025
-</td>
-<td style="text-align:right;">
--0.27
-</td>
-<td style="text-align:right;">
-0.04
+0.154
 </td>
 <td style="text-align:right;">
 100

@@ -55,7 +55,7 @@ library(jofou.lib)
 
 iris %>% 
   my_inspect_imb()
-```
+``` 
 
 ```{r example_4, message = F}
 library(tidyverse)
