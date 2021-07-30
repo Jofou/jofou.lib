@@ -11,8 +11,7 @@ for me to work efficiently.
 
 ## Installation
 
-You can install the released version of hr.churn from
-[CRAN](https://CRAN.R-project.org) with:
+You can install the lastest version of jofou.lib with:
 
 ``` r
 devtools::install_github("jofou/jofou.lib")
