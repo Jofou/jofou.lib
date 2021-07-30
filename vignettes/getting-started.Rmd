@@ -10,10 +10,97 @@ vignette: >
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  
+  # Customize output of figures
+  out.width = '100%',
+  fig.align = "center",
+  fig.width = 7,
+  fig.height = 5
 )
 ```
 
-```{r setup}
+This is how to get started with `jofou.lib`. 
+
+# List functions avalaibles:
+
+- Resume et comparaison des variables categotiques: `my_inspect_cat()`
+- Coeficient de correlation pour toutes les variables numeriques: `my_inspect_cor()`
+- Resume des categories les plus utilisees: `my_inspect_imb()`
+- Nombre de valeur manquante pour chaque variable: `my_inspect_na()`
+- Resume et comparaison des variables numeriques: `my_inspect_num()` 
+- Types de variables disponibles: `my_inspect_types()`
+
+## Load Libraries
+
+Load the following Libraries
+
+```{r setup, message=FALSE, warning=FALSE}
+library(tidyverse)
 library(jofou.lib)
 ```
+
+## Get the Iris data
+
+The only requirement is that the data must have the type of variables your looking to summarize.
+
+```{r}
+head(iris)
+```
+
+
+
+## Make EDA with the my_inspect group functions
+
+
+### Step 1: Types of variables
+
+Use `my_inspect_types()` to quickly get a summary of your data. 
+
+```{r}
+iris %>%
+ my_inspect_types()
+```
+
+### Step 2: Look at numeric variables
+
+
+Use `my_inspect_num()` to quickly get a summary of your numerical variables. 
+
+```{r}
+iris %>%
+ my_inspect_num()
+```
+
+Look at correlation between numerical variables.
+```{r}
+iris %>%
+ my_inspect_cor()
+```
+
+
+### Step 4: Look at categorical variables
+
+Use `my_inspect_cat()` to quickly get a summary of your categorical variables.
+
+```{r}
+iris %>%
+ my_inspect_cat()
+```
+
+Or see the most frequently used categorical variables.
+
+```{r}
+iris %>%
+ my_inspect_imb()
+```
+
+### Step 4: Look at NAs
+
+Use `my_inspect_cat()` to quickly know where are the NAs in your data.
+
+```{r}
+iris %>%
+ my_inspect_na()
+```
+

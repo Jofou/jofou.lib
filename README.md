@@ -6,56 +6,597 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of jofou.lib is to …
+The goal of `jofou.lib` is to regroup all the functions that are useful
+for me to work efficiently.
 
 ## Installation
 
-You can install the released version of jofou.lib from
+You can install the released version of hr.churn from
 [CRAN](https://CRAN.R-project.org) with:
 
 ``` r
-install.packages("jofou.lib")
-```
-
-And the development version from [GitHub](https://github.com/) with:
-
-``` r
-# install.packages("devtools")
-devtools::install_github("Jofou/jofou.lib")
+devtools::install_github("jofou/jofou.lib")
 ```
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+This are basics examples which shows you how use the my\_inspect group
+function:
 
 ``` r
+library(tidyverse)
 library(jofou.lib)
-## basic example code
+
+iris %>% 
+  my_inspect_cat()
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`?
-You can include R chunks like so:
+<table class="table table-condensed" style="width: auto !important; ">
+<caption>
+Resume et comparaison des variables categoriques
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Nom de la variable
+</th>
+<th style="text-align:right;">
+Nombre
+</th>
+<th style="text-align:left;">
+Commun
+</th>
+<th style="text-align:right;">
+pourcentage
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Species
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+<td style="text-align:right;">
+33
+</td>
+</tr>
+</tbody>
+</table>
 
 ``` r
-summary(cars)
-#>      speed           dist       
-#>  Min.   : 4.0   Min.   :  2.00  
-#>  1st Qu.:12.0   1st Qu.: 26.00  
-#>  Median :15.0   Median : 36.00  
-#>  Mean   :15.4   Mean   : 42.98  
-#>  3rd Qu.:19.0   3rd Qu.: 56.00  
-#>  Max.   :25.0   Max.   :120.00
+library(tidyverse)
+library(jofou.lib)
+
+iris %>% 
+  my_inspect_cor()
 ```
 
-You’ll still need to render `README.Rmd` regularly, to keep `README.md`
-up-to-date. `devtools::build_readme()` is handy for this. You could also
-use GitHub Actions to re-render `README.Rmd` every time you push. An
-example workflow can be found here:
-<https://github.com/r-lib/actions/tree/master/examples>.
+<table class="table table-condensed" style="width: auto !important; ">
+<caption>
+Coeficient de correlation pour toutes les variables numeriques
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+col\_1
+</th>
+<th style="text-align:left;">
+col\_2
+</th>
+<th style="text-align:right;">
+corr
+</th>
+<th style="text-align:right;">
+p\_value
+</th>
+<th style="text-align:right;">
+lower
+</th>
+<th style="text-align:right;">
+upper
+</th>
+<th style="text-align:right;">
+pcnt\_nna
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Petal.Width
+</td>
+<td style="text-align:left;">
+Petal.Length
+</td>
+<td style="text-align:right;">
+0.96
+</td>
+<td style="text-align:right;">
+0.000000
+</td>
+<td style="text-align:right;">
+0.95
+</td>
+<td style="text-align:right;">
+0.97
+</td>
+<td style="text-align:right;">
+100
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Petal.Length
+</td>
+<td style="text-align:left;">
+Sepal.Length
+</td>
+<td style="text-align:right;">
+0.87
+</td>
+<td style="text-align:right;">
+0.000000
+</td>
+<td style="text-align:right;">
+0.83
+</td>
+<td style="text-align:right;">
+0.91
+</td>
+<td style="text-align:right;">
+100
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Petal.Width
+</td>
+<td style="text-align:left;">
+Sepal.Length
+</td>
+<td style="text-align:right;">
+0.82
+</td>
+<td style="text-align:right;">
+0.000000
+</td>
+<td style="text-align:right;">
+0.76
+</td>
+<td style="text-align:right;">
+0.86
+</td>
+<td style="text-align:right;">
+100
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Petal.Length
+</td>
+<td style="text-align:left;">
+Sepal.Width
+</td>
+<td style="text-align:right;">
+-0.43
+</td>
+<td style="text-align:right;">
+0.000000
+</td>
+<td style="text-align:right;">
+-0.55
+</td>
+<td style="text-align:right;">
+-0.29
+</td>
+<td style="text-align:right;">
+100
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Petal.Width
+</td>
+<td style="text-align:left;">
+Sepal.Width
+</td>
+<td style="text-align:right;">
+-0.37
+</td>
+<td style="text-align:right;">
+0.000009
+</td>
+<td style="text-align:right;">
+-0.50
+</td>
+<td style="text-align:right;">
+-0.22
+</td>
+<td style="text-align:right;">
+100
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Sepal.Width
+</td>
+<td style="text-align:left;">
+Sepal.Length
+</td>
+<td style="text-align:right;">
+-0.12
+</td>
+<td style="text-align:right;">
+0.154025
+</td>
+<td style="text-align:right;">
+-0.27
+</td>
+<td style="text-align:right;">
+0.04
+</td>
+<td style="text-align:right;">
+100
+</td>
+</tr>
+</tbody>
+</table>
 
-You can also embed plots, for example:
+``` r
+library(tidyverse)
+library(jofou.lib)
 
-<img src="man/figures/README-pressure-1.png" width="100%" />
+iris %>% 
+  my_inspect_imb()
+```
 
-In that case, don’t forget to commit and push the resulting figure
-files, so they display on GitHub and CRAN.
+<table class="table table-striped table-condensed" style="width: auto !important; ">
+<caption>
+Resume des categories les plus utilisees
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Nom de la variable
+</th>
+<th style="text-align:left;">
+Categorie
+</th>
+<th style="text-align:right;">
+Pourcentage
+</th>
+<th style="text-align:right;">
+Nombre
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Species
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+<td style="text-align:right;">
+33
+</td>
+<td style="text-align:right;">
+50
+</td>
+</tr>
+</tbody>
+</table>
+
+``` r
+library(tidyverse)
+library(jofou.lib)
+
+iris %>% 
+  my_inspect_na()
+```
+
+<table class="table table-condensed" style="width: auto !important; ">
+<caption>
+Nombre de valeur manquante pour chaque variable
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Nom de la variable
+</th>
+<th style="text-align:right;">
+NA
+</th>
+<th style="text-align:right;">
+Pourcentage
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Sepal.Length
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Sepal.Width
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Petal.Length
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Petal.Width
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Species
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+</tbody>
+</table>
+
+``` r
+library(tidyverse)
+library(jofou.lib)
+
+iris %>% 
+  my_inspect_num()
+```
+
+<table class="table table-condensed" style="width: auto !important; ">
+<caption>
+Resume et comparaison des variables numeriques
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Nom de la variable
+</th>
+<th style="text-align:right;">
+min
+</th>
+<th style="text-align:right;">
+q1
+</th>
+<th style="text-align:right;">
+median
+</th>
+<th style="text-align:right;">
+moyenne
+</th>
+<th style="text-align:right;">
+q3
+</th>
+<th style="text-align:right;">
+max
+</th>
+<th style="text-align:right;">
+sd
+</th>
+<th style="text-align:right;">
+NA (%)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Sepal.Length
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Sepal.Width
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Petal.Length
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Petal.Width
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+</tbody>
+</table>
+
+``` r
+library(tidyverse)
+library(jofou.lib)
+
+iris %>% 
+  my_inspect_types()
+```
+
+<table class="table table-condensed" style="width: auto !important; ">
+<caption>
+Types de variables disponibles
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Type
+</th>
+<th style="text-align:right;">
+Nombre
+</th>
+<th style="text-align:right;">
+Pourcentage
+</th>
+<th style="text-align:left;">
+Nom des variables
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+numeric
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+80
+</td>
+<td style="text-align:left;">
+Sepal.Length, Sepal.Width , Petal.Length, Petal.Width
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+factor
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+20
+</td>
+<td style="text-align:left;">
+Species
+</td>
+</tr>
+</tbody>
+</table>

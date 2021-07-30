@@ -1,5 +1,6 @@
 ---
 output: github_document
+always_allow_html: true
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -18,43 +19,64 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of jofou.lib is to ...
+The goal of `jofou.lib` is to regroup all the functions that are useful for me to work efficiently.
 
 ## Installation
 
-You can install the released version of jofou.lib from [CRAN](https://CRAN.R-project.org) with:
+You can install the released version of hr.churn from [CRAN](https://CRAN.R-project.org) with:
 
 ``` r
-install.packages("jofou.lib")
+devtools::install_github("jofou/jofou.lib")
 ```
 
-And the development version from [GitHub](https://github.com/) with:
-
-``` r
-# install.packages("devtools")
-devtools::install_github("Jofou/jofou.lib")
-```
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+This are basics examples which shows you how use the my_inspect group function:
 
-```{r example}
+```{r example_1, message = F}
+library(tidyverse)
 library(jofou.lib)
-## basic example code
+
+iris %>% 
+  my_inspect_cat()
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
+```{r example_2, message = F}
+library(tidyverse)
+library(jofou.lib)
 
-```{r cars}
-summary(cars)
+iris %>% 
+  my_inspect_cor()
 ```
 
-You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date. `devtools::build_readme()` is handy for this. You could also use GitHub Actions to re-render `README.Rmd` every time you push. An example workflow can be found here: <https://github.com/r-lib/actions/tree/master/examples>.
+```{r example_3, message = F}
+library(tidyverse)
+library(jofou.lib)
 
-You can also embed plots, for example:
-
-```{r pressure, echo = FALSE}
-plot(pressure)
+iris %>% 
+  my_inspect_imb()
 ```
 
-In that case, don't forget to commit and push the resulting figure files, so they display on GitHub and CRAN.
+```{r example_4, message = F}
+library(tidyverse)
+library(jofou.lib)
+
+iris %>% 
+  my_inspect_na()
+```
+
+```{r example_5, message = F}
+library(tidyverse)
+library(jofou.lib)
+
+iris %>% 
+  my_inspect_num()
+```
+
+```{r example_6, message = F}
+library(tidyverse)
+library(jofou.lib)
+
+iris %>% 
+  my_inspect_types()
+```
