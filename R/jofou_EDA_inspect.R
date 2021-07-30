@@ -100,11 +100,12 @@ my_inspect_num<- function(df){
 #' @export
 my_inspect_cor<- function(df){
   inspectdf::inspect_cor(df) %>%
+    dplyr::select(-lower, -upper) %>%
     knitr::kable(caption = "Coeficient de correlation pour toutes les variables numeriques",
-                 digits = c(2,2,2,6)) %>%
+                 col.names=c("Variable 1","Variable 2", "Correlation","Valeur P", "N-NA (%)"),
+                 digits = c(4,1,2)) %>%
     kableExtra::kable_styling(bootstrap_options = c("condensed"), full_width = F, position = "left")
 }
-
 ## 5.0 Résumé et comparaison des variables catégotiques ----
 #' EDA Categorical Variables Summary
 #'

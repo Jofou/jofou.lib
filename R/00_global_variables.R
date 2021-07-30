@@ -1,3 +1,3 @@
 globalVariables(names=c(
-  "hist"
+  "hist", "lower", "upper"
 ))
