@@ -5,8 +5,7 @@ Authors@R: c(
      person("Johanie", "Fournier", email = "fournier.johanie@icloud.com", role = c("aut", "cre")),
      person("Agriculture, Données, Visualisation", role = "cph"))
 Description: Regroup all the functions that are useful for me to work efficiently.
-License: `use_mit_license()`, `use_gpl3_license()` or friends to
-    pick a license
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
