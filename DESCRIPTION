@@ -21,7 +21,8 @@ Imports:
     ggplot2,
     inspectdf,
     kableExtra,
-    patchwork
+    patchwork,
+    PerformanceAnalytics
 Suggests: 
     tidyverse,
     knitr,

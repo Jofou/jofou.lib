@@ -213,7 +213,9 @@ my_num_dist <- function(df, na.rm = TRUE){
       ggplot2::theme(axis.ticks.x = ggplot2::element_blank())
 
     #Group plt1 and plt2
-    plot<-wrap_plots(plt2, plt1) %>%  patchwork::plot_layout(nrow = 2, heights = c(2, 1))
+    design <- "#BB
+                AA#"
+    plot<-wrap_plots(B=plt2, A=plt1, design = design)
 
     # print plots to screen
     base::print(plot)
@@ -258,4 +260,31 @@ plot_filler <- function() {
   p <- ggplot()
   class(p) <- c('plot_filler', class(p))
   p
+}
+
+## 8.0 Graphique corrélation variables numériques ----
+#' EDA Correlation Chart for all Numerics Variables
+#'
+#' @description
+#' Show [PerformanceAnalytics](https://github.com/braverock/PerformanceAnalytics) correlation chart for all the numeric varibles in the data.
+#'
+#' @param df A data frame.
+#' @param na.rm will remove NAs before making plots.
+#'
+#' @details
+#' - Data must have the type of variables your looking to summarize.
+#'
+#' @examples
+#' library(tidyverse)
+#'
+#' iris %>%
+#'     my_corr_num_graph()
+#'
+#' @export
+my_corr_num_graph <- function(df, na.rm = TRUE){
+  graph_data<- df %>%
+    dplyr::select_if(is.numeric)
+  #faire le graphique
+  plot<-PerformanceAnalytics::chart.Correlation(graph_data, method = "pearson", histogram=TRUE, pch=19)
+  print(plot)
 }
