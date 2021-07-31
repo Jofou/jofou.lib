@@ -199,8 +199,11 @@ my_num_dist <- function(df, na.rm = TRUE){
       ggplot2::xlab("") +
       ggplot2::ylab("")+
       ggplot2::theme_minimal()+
-      ggplot2::theme(axis.text.y=ggplot2::element_blank(),
-            axis.ticks.y=ggplot2::element_blank())
+      ggplot2::theme(axis.line = ggplot2::element_line(linetype="solid", size=.3, color="black"),
+                     axis.ticks = ggplot2::element_line(linetype="solid", size=.5, color="black"),
+                     panel.grid.major = ggplot2::element_blank(),
+                     panel.grid.minor = ggplot2::element_blank())
+
 
     # create plt2 for each v in df
     plt2 <-ggplot2::ggplot(subset(graph_data, graph_data$key==slices.list[v])) +
@@ -209,14 +212,17 @@ my_num_dist <- function(df, na.rm = TRUE){
                      fill = "#FFFFFF", color = "black") +
       ggplot2::ylab("Frequence Relative")+
       ggplot2::xlab("")+
-      ggplot2::theme_minimal()+
       ggplot2::labs(title=slices.list[v])+
-      ggplot2::theme(axis.text.x = ggplot2::element_blank())+
-      ggplot2::theme(axis.ticks.x = ggplot2::element_blank())
+      ggplot2::theme_minimal()+
+      ggplot2::theme(axis.line = ggplot2::element_line(linetype="solid", size=.3, color="black"),
+                     axis.ticks = ggplot2::element_line(linetype="solid", size=.5, color="black"),
+                     panel.grid.major = ggplot2::element_blank(),
+                     panel.grid.minor = ggplot2::element_blank())
+
 
     #Group plt1 and plt2
-    design <- "#B
-                A#"
+    design <- "#BB
+               AA#"
     plot<-wrap_plots(B=plt2, A=plt1, design = design)
 
     # print plots to screen
