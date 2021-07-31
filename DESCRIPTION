@@ -22,7 +22,8 @@ Imports:
     inspectdf,
     kableExtra,
     patchwork,
-    PerformanceAnalytics
+    PerformanceAnalytics,
+    purrr
 Suggests: 
     tidyverse,
     knitr,
