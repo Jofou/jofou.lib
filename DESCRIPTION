@@ -17,9 +17,11 @@ Imports:
     rlang (>= 0.1.2),
     tibble,
     dplyr,
+    tidyr,
     ggplot2,
     inspectdf,
-    kableExtra
+    kableExtra,
+    patchwork
 Suggests: 
     tidyverse,
     knitr,

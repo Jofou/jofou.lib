@@ -158,3 +158,104 @@ my_inspect_imb<- function(df){
                  digits = 0) %>%
     kableExtra::kable_styling(bootstrap_options = c("striped","condensed"), full_width = F, position = "left")
 }
+
+## 7.0 Distribution des variables numériques ----
+#' EDA Numerical Variables Distribution
+#'
+#' @description
+#' Show distribution of numeric variables with a supperposition of box_plot and an histogram.
+#'
+#' @param df A data frame.
+#' @param na.rm will remove NAs before making plots.
+#'
+#' @details
+#' - Data must have the type of variables your looking to summarize.
+#'
+#' @examples
+#' library(tidyverse)
+#'
+#' iris %>%
+#'     my_num_dist()
+#'
+#' @export
+my_num_dist <- function(df, na.rm = TRUE){
+
+  # create list of numeric column in data to loop over
+  slices <-inspectdf::inspect_num(df)
+  slices.list<-base::unique(slices$col_name)
+
+  #arrange df
+  graph_data<- df %>%
+    dplyr::select_if(is.numeric) %>%
+    tidyr::gather()
+
+  # create for loop to produce ggplot2 graphs
+  for(v in base::seq_along(slices.list)) {
+
+    # create plt1 for each v in df
+    plt1 <- ggplot2::ggplot(subset(graph_data, graph_data$key==slices.list[v]), ggplot2::aes(x="", y = value)) +
+      ggplot2::geom_boxplot(fill = "#FFFFFF", color = "black") +
+      ggplot2::coord_flip() +
+      ggplot2::xlab("") +
+      ggplot2::ylab("")+
+      ggplot2::theme(axis.text.y=ggplot2::element_blank(),
+            axis.ticks.y=ggplot2::element_blank())
+
+    # create plt2 for each v in df
+    plt2 <-ggplot2::ggplot(subset(graph_data, graph_data$key==slices.list[v])) +
+      ggplot2::geom_histogram(ggplot2::aes(x = value, y = (..count..)/sum(..count..)),
+                     position = "identity", binwidth = 1,
+                     fill = "#FFFFFF", color = "black") +
+      ggplot2::ylab("Frequence Relative")+
+      ggplot2::xlab("")+
+      ggplot2::labs(title=slices.list[v])+
+      ggplot2::theme(axis.text.x = ggplot2::element_blank())+
+      ggplot2::theme(axis.ticks.x = ggplot2::element_blank())
+
+    #Group plt1 and plt2
+    plot<-wrap_plots(plt2, plt1) %>%  patchwork::plot_layout(nrow = 2, heights = c(2, 1))
+
+    # print plots to screen
+    base::print(plot)
+  }
+}
+
+#utilities
+wrap_plots <- function(..., ncol = NULL, nrow = NULL, byrow = NULL,
+                       widths = NULL, heights = NULL, guides = NULL,
+                       tag_level = NULL, design = NULL) {
+  if (is_valid_plot(..1)) {
+    plots <- list(...)
+  } else if (is.list(..1)) {
+    plots <- ..1
+  } else {
+    stop('Can only wrap ggplot and/or grob objects or a list of them', call. = FALSE)
+  }
+  if (!all(vapply(plots, is_valid_plot, logical(1)))) stop('Only know how to add ggplots and/or grobs', call. = FALSE)
+  if (!is.null(names(plots)) && !is.null(design) && is.character(design)) {
+    area_names <- unique(trimws(strsplit(design, '')[[1]]))
+    area_names <- sort(setdiff(area_names, c('', '#')))
+    if (all(names(plots) %in% area_names)) {
+      plot_list <- vector('list', length(area_names))
+      names(plot_list) <- area_names
+      plot_list[names(plots)] <- plots
+      plot_list[vapply(plot_list, is.null, logical(1))] <- list(patchwork::plot_spacer())
+      plots <- plot_list
+    }
+  }
+  Reduce(`+`, plots, init = plot_filler()) + patchwork::plot_layout(
+    ncol = ncol, nrow = nrow, byrow = byrow, widths = widths, heights = heights,
+    guides = guides, tag_level = tag_level, design = design
+  )
+}
+
+#' @importFrom ggplot2 is.ggplot
+#' @importFrom grid is.grob
+is_valid_plot <- function(x) is.ggplot(x) || is.grob(x)
+
+#' @importFrom ggplot2 ggplot
+plot_filler <- function() {
+  p <- ggplot()
+  class(p) <- c('plot_filler', class(p))
+  p
+}
