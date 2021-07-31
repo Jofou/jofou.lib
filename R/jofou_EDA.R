@@ -261,7 +261,7 @@ wrap_plots <- function(..., ncol = NULL, nrow = NULL, byrow = NULL,
 
 #' @importFrom ggplot2 is.ggplot
 #' @importFrom grid is.grob
-is_valid_plot <- function(x) is.ggplot(x) || is.grob(x)
+is_valid_plot <- function(x) ggplot2::is.ggplot(x) || is.grob(x)
 
 #' @importFrom ggplot2 ggplot
 plot_filler <- function() {
