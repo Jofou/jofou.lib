@@ -1,3 +1,3 @@
 globalVariables(names=c(
-  "hist", "lower", "upper"
+  "hist", "lower", "upper","theme_minimal", "margin"
 ))
