@@ -23,7 +23,12 @@ Imports:
     kableExtra,
     patchwork,
     PerformanceAnalytics,
-    purrr
+    purrr,
+    modeltime, 
+    rsample,
+    lubridate, 
+    parsnip, 
+    timetk
 Suggests: 
     tidyverse,
     knitr,
