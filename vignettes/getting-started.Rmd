@@ -148,7 +148,7 @@ The only requirement is that the data must have the type of variables your looki
 head(iris)
 ```
 
-## Function 1: Calculate mode
+### Function 1: Calculate mode
 
 Use `calculate_mode()` to quickly get the mode of your categorical variable. 
 
@@ -159,7 +159,7 @@ iris %>%
   summarise(mode_species=calculate_mode(Species))
 ```
 
-### Function 2: Not in
+### Function 2: Not in 
 
 Use `%ni%()` remove value in variable.  
 
@@ -204,7 +204,7 @@ model_fit_arima <- arima_reg() %>%
    fit(value ~ date, data = training(splits))
 ```
 
-## Function 1: Calibrate and plot
+### Function 1: Calibrate and plot
 
 Use `calibrate_and_plot()` to quickly get the visual result of the fitted model. 
 
