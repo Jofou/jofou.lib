@@ -10,7 +10,7 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   fig.path = "man/figures/README-",
-  out.width = "100%"
+  out.width = "80%"
 )
 ```
 
@@ -28,6 +28,7 @@ You can install the lastest version of jofou.lib with:
 ``` r
 devtools::install_github("jofou/jofou.lib")
 ```
+# EDA Functions
 
 ## Example
 
@@ -79,4 +80,85 @@ library(jofou.lib)
 
 iris %>% 
   my_inspect_types()
+```
+
+I also have a couples of other functions to show distributions of numeric and categorical variables:
+
+```{r example_7, message = F}
+library(tidyverse)
+library(jofou.lib)
+
+iris %>% 
+  my_num_dist()
+```
+
+```{r example_8, message = F}
+library(tidyverse)
+library(jofou.lib)
+
+iris %>% 
+  my_corr_num_graph()
+```
+
+```{r example_9, message = F}
+library(tidyverse)
+library(jofou.lib)
+
+iris %>% 
+  my_cat_dist()
+```
+
+# Utilities Functions
+
+## Example
+
+These are basic examples that show you how to use my utilities functions: 
+
+```{r example_10, message = F}
+library(tidyverse)
+library(jofou.lib)
+
+iris %>%
+  mutate(cat_Sepal.Length=round(Sepal.Length, digits = 0)) %>%
+  group_by(cat_Sepal.Length) %>%
+  summarise(mode_species=calculate_mode(Species))
+```
+
+```{r example_11, message = F}
+library(tidyverse)
+library(jofou.lib)
+
+iris %>%
+  filter(Species %ni% "setosa") %>%
+  group_by(Species) %>%
+  summarise(nb=dplyr::n())
+```
+
+# ML Functions
+
+## Example
+
+These are basic examples that show you how to use my machine learning utilities functions: 
+
+```{r example_12, message = F}
+library(tidyverse)
+library(lubridate)
+library(timetk)
+library(parsnip)
+library(rsample)
+library(modeltime)
+
+# Data
+data_prepared_tbl <- m4_monthly %>% filter(id == "M750")
+
+# Split Data 80/20
+splits <- initial_time_split(data_prepared_tbl, prop = 0.9)
+
+# Model: auto_arima
+model_fit_arima <- arima_reg() %>%
+   set_engine(engine = "auto_arima") %>%
+   fit(value ~ date, data = training(splits))
+
+# Calibrate and plot
+calibrate_and_plot(model_fit_arima, type="testing")
 ```

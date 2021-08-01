@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
   comment = "#>",
   
   # Customize output of figures
-  out.width = '100%',
+  out.width = '80%',
   fig.align = "center",
   fig.width = 7,
   fig.height = 5
@@ -22,7 +22,7 @@ knitr::opts_chunk$set(
 
 This is how to get started with `jofou.lib`. 
 
-# List functions avalaibles:
+# EDA function:
 
 - Resume et comparaison des variables categotiques: `my_inspect_cat()`
 - Coeficient de correlation pour toutes les variables numeriques: `my_inspect_cor()`
@@ -30,12 +30,15 @@ This is how to get started with `jofou.lib`.
 - Nombre de valeur manquante pour chaque variable: `my_inspect_na()`
 - Resume et comparaison des variables numeriques: `my_inspect_num()` 
 - Types de variables disponibles: `my_inspect_types()`
+- Distribution des variables numériques: `my_num_dist()`
+- Corrélations entre les variables numériques: `my_corr_num_graph()`
+- Distribution des variables catégoriques: `my_cat_dist()`
 
 ## Load Libraries
 
 Load the following Libraries
 
-```{r setup, message=FALSE, warning=FALSE}
+```{r, message=FALSE, warning=FALSE}
 library(tidyverse)
 library(jofou.lib)
 ```
@@ -48,10 +51,7 @@ The only requirement is that the data must have the type of variables your looki
 head(iris)
 ```
 
-
-
 ## Make EDA with the my_inspect group functions
-
 
 ### Step 1: Types of variables
 
@@ -73,11 +73,25 @@ iris %>%
 ```
 
 Look at correlation between numerical variables.
+
 ```{r}
 iris %>%
  my_inspect_cor()
 ```
 
+Look at the distribution of numeric variables.
+
+```{r}
+iris %>%
+ my_num_dist()
+```
+
+Look at the correlation between numeric variables.
+
+```{r}
+iris %>%
+ my_corr_num_graph()
+```
 
 ### Step 4: Look at categorical variables
 
@@ -95,12 +109,105 @@ iris %>%
  my_inspect_imb()
 ```
 
+Use `my_cat_dist()` to look at the distribution of categorical variables. 
+
+```{r}
+iris %>%
+ my_cat_dist()
+```
+
 ### Step 4: Look at NAs
 
-Use `my_inspect_cat()` to quickly know where are the NAs in your data.
+Use `my_inspect_na()` to quickly know where are the NAs in your data.
 
 ```{r}
 iris %>%
  my_inspect_na()
 ```
 
+
+# Utilities function:
+
+- Calculer le mode des variables categotiques: `calculate_mode()`
+- Ne contient pas: `%ni%`
+
+## Load Libraries
+
+Load the following Libraries
+
+```{r, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(jofou.lib)
+```
+
+## Get the Iris data
+
+The only requirement is that the data must have the type of variables your looking to summarize.
+
+```{r}
+head(iris)
+```
+
+## Function 1: Calculate mode
+
+Use `calculate_mode()` to quickly get the mode of your categorical variable. 
+
+```{r}
+iris %>%
+  mutate(cat_Sepal.Length=round(Sepal.Length, digits = 0)) %>%
+  group_by(cat_Sepal.Length) %>%
+  summarise(mode_species=calculate_mode(Species))
+```
+
+### Function 2: Not in
+
+Use `%ni%()` remove value in variable.  
+
+```{r}
+iris %>%
+  filter(Species %ni% "setosa") %>%
+  group_by(Species) %>%
+  summarise(nb=dplyr::n())
+```
+
+# ML function:
+
+- Calibrer et créer un graphique: `calibrate_and_plot()`
+
+## Load Libraries
+
+Load the following Libraries
+
+```{r, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(lubridate)
+library(timetk)
+library(parsnip)
+library(rsample)
+library(modeltime)
+library(jofou.lib)
+```
+
+## Prepare the data
+
+```{r}
+data_prepared_tbl <- m4_monthly %>% filter(id == "M750")
+# Split Data 80/20
+splits <- initial_time_split(data_prepared_tbl, prop = 0.9)
+```
+
+## Create a fitted model
+
+```{r}
+model_fit_arima <- arima_reg() %>%
+   set_engine(engine = "auto_arima") %>%
+   fit(value ~ date, data = training(splits))
+```
+
+## Function 1: Calibrate and plot
+
+Use `calibrate_and_plot()` to quickly get the visual result of the fitted model. 
+
+```{r}
+calibrate_and_plot(model_fit_arima, type="testing")
+```

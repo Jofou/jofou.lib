@@ -17,6 +17,8 @@ You can install the lastest version of jofou.lib with:
 devtools::install_github("jofou/jofou.lib")
 ```
 
+# EDA Functions
+
 ## Example
 
 This are basics examples which shows you how use the my\_inspect group
@@ -557,3 +559,114 @@ Species
 </tr>
 </tbody>
 </table>
+
+I also have a couples of other functions to show distributions of
+numeric and categorical variables:
+
+``` r
+library(tidyverse)
+library(jofou.lib)
+
+iris %>% 
+  my_num_dist()
+```
+
+<img src="man/figures/README-example_7-1.png" width="80%" /><img src="man/figures/README-example_7-2.png" width="80%" /><img src="man/figures/README-example_7-3.png" width="80%" /><img src="man/figures/README-example_7-4.png" width="80%" />
+
+``` r
+library(tidyverse)
+library(jofou.lib)
+
+iris %>% 
+  my_corr_num_graph()
+```
+
+<img src="man/figures/README-example_8-1.png" width="80%" />
+
+    #> NULL
+
+``` r
+library(tidyverse)
+library(jofou.lib)
+
+iris %>% 
+  my_cat_dist()
+```
+
+<img src="man/figures/README-example_9-1.png" width="80%" />
+
+# Utilities Functions
+
+## Example
+
+These are basic examples that show you how to use my utilities
+functions:
+
+``` r
+library(tidyverse)
+library(jofou.lib)
+
+iris %>%
+  mutate(cat_Sepal.Length=round(Sepal.Length, digits = 0)) %>%
+  group_by(cat_Sepal.Length) %>%
+  summarise(mode_species=calculate_mode(Species))
+#> # A tibble: 5 x 2
+#>   cat_Sepal.Length mode_species
+#> *            <dbl> <fct>       
+#> 1                4 setosa      
+#> 2                5 setosa      
+#> 3                6 versicolor  
+#> 4                7 virginica   
+#> 5                8 virginica
+```
+
+``` r
+library(tidyverse)
+library(jofou.lib)
+
+iris %>%
+  filter(Species %ni% "setosa") %>%
+  group_by(Species) %>%
+  summarise(nb=dplyr::n())
+#> # A tibble: 2 x 2
+#>   Species       nb
+#> * <fct>      <int>
+#> 1 versicolor    50
+#> 2 virginica     50
+```
+
+# ML Functions
+
+## Example
+
+These are basic examples that show you how to use my machine learning
+utilities functions:
+
+``` r
+library(tidyverse)
+library(lubridate)
+library(timetk)
+library(parsnip)
+library(rsample)
+library(modeltime)
+
+# Data
+data_prepared_tbl <- m4_monthly %>% filter(id == "M750")
+
+# Split Data 80/20
+splits <- initial_time_split(data_prepared_tbl, prop = 0.9)
+
+# Model: auto_arima
+model_fit_arima <- arima_reg() %>%
+   set_engine(engine = "auto_arima") %>%
+   fit(value ~ date, data = training(splits))
+
+# Calibrate and plot
+calibrate_and_plot(model_fit_arima, type="testing")
+#> # A tibble: 1 x 9
+#>   .model_id .model_desc             .type   mae  mape  mase smape  rmse   rsq
+#>       <int> <chr>                   <chr> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
+#> 1         1 ARIMA(0,1,1)(0,1,1)[12] Test   151.  1.41 0.516  1.43  198. 0.930
+```
+
+<img src="man/figures/README-example_12-1.png" width="80%" />
