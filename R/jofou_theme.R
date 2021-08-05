@@ -4,6 +4,7 @@
 #' @param strip_text_size,strip_text_margin plot strip text size and margin
 #' @param subtitle_size,subtitle_margin plot subtitle size and margin
 #' @param plot_title_size,plot_title_margin plot title size and margin
+#' @param plot_axis,plot_ticks plot axis and ticks size
 #' @param ... Other arguments passed to \code{theme_minimal}
 #'
 #' @details The Calibri font is a base font of the [extrafont](https://github.com/wch/extrafont) package
@@ -35,6 +36,8 @@ theme_calibri <- function(base_size = 11,
                           subtitle_margin = 10,
                           plot_title_size = 16,
                           plot_title_margin = 10,
+                          plot_axis= 1,
+                          plot_ticks= 0.5,
                           ...) {
   ret <- ggplot2::theme_minimal(base_family = "Calibri",
                                 base_size = base_size, ...)
@@ -54,6 +57,13 @@ theme_calibri <- function(base_size = 11,
     family = "Calibri",
     face ="bold"
   )
+  ret$axis.line <- ggplot2::element_line(
+    size = plot_axis,
+  )
+  ret$axis.ticks <- ggplot2::element_line(
+    size = plot_ticks,
+  )
+  ret$panel.grid <- ggplot2::element_blank()
   ret
 }
 #' Minimal ggplot2 theme using the Serif font
@@ -62,6 +72,7 @@ theme_calibri <- function(base_size = 11,
 #' @param strip_text_size,strip_text_margin plot strip text size and margin
 #' @param subtitle_size,subtitle_margin plot subtitle size and margin
 #' @param plot_title_size,plot_title_margin plot title size and margin
+#' @param plot_axis,plot_ticks plot axis and ticks size
 #' @param ... Other arguments passed to \code{theme_minimal}
 #'
 #' @details The Serif font is a base font of the [extrafont](https://github.com/wch/extrafont) package
@@ -93,6 +104,8 @@ theme_serif <- function(base_size = 11,
                           subtitle_margin = 10,
                           plot_title_size = 16,
                           plot_title_margin = 10,
+                          plot_axis= 1,
+                          plot_ticks= 0.5,
                           ...) {
   ret <- ggplot2::theme_minimal(base_family = "serif",
                                 base_size = base_size, ...)
@@ -112,6 +125,13 @@ theme_serif <- function(base_size = 11,
     family = "serif",
     face ="bold"
   )
+  ret$axis.line <- ggplot2::element_line(
+    size = plot_axis,
+  )
+  ret$axis.ticks <- ggplot2::element_line(
+    size = plot_ticks,
+  )
+  ret$panel.grid <- ggplot2::element_blank()
   ret
 }
 
@@ -121,6 +141,7 @@ theme_serif <- function(base_size = 11,
 #' @param strip_text_size,strip_text_margin plot strip text size and margin
 #' @param subtitle_size,subtitle_margin plot subtitle size and margin
 #' @param plot_title_size,plot_title_margin plot title size and margin
+#' @param plot_axis,plot_ticks plot axis and ticks size
 #' @param ... Other arguments passed to \code{theme_minimal}
 #'
 #' @details The AvantGarde font is a base font of the [extrafont](https://github.com/wch/extrafont) package
@@ -152,6 +173,8 @@ theme_avantgarde <- function(base_size = 11,
                         subtitle_margin = 10,
                         plot_title_size = 16,
                         plot_title_margin = 10,
+                        plot_axis= 1,
+                        plot_ticks= 0.5,
                         ...) {
   ret <- ggplot2::theme_minimal(base_family = "AvantGarde",
                                 base_size = base_size, ...)
@@ -171,5 +194,12 @@ theme_avantgarde <- function(base_size = 11,
     family = "AvantGarde",
     face ="bold"
   )
+  ret$axis.line <- ggplot2::element_line(
+    size = plot_axis,
+  )
+  ret$axis.ticks <- ggplot2::element_line(
+    size = plot_ticks,
+  )
+  ret$panel.grid <- ggplot2::element_blank()
   ret
 }

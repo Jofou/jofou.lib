@@ -12,6 +12,8 @@ theme_avantgarde(
   subtitle_margin = 10,
   plot_title_size = 16,
   plot_title_margin = 10,
+  plot_axis = 1,
+  plot_ticks = 0.5,
   ...
 )
 }
@@ -23,6 +25,8 @@ theme_avantgarde(
 \item{subtitle_size, subtitle_margin}{plot subtitle size and margin}
 
 \item{plot_title_size, plot_title_margin}{plot title size and margin}
+
+\item{plot_axis, plot_ticks}{plot axis and ticks size}
 
 \item{...}{Other arguments passed to \code{theme_minimal}}
 }
