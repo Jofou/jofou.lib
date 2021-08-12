@@ -28,7 +28,8 @@ Imports:
     rsample,
     lubridate, 
     parsnip, 
-    timetk
+    timetk,
+    extrafont
 Suggests: 
     tidyverse,
     knitr,
