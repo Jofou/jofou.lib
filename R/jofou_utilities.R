@@ -49,3 +49,28 @@ calculate_mode <- function(x) {
 #' @export
 #"#%ni%"<-Negate('%in%')
 "%ni%" <- function(x, table) match(x, table, nomatch = 0) == 0
+
+## 3.0 Date in title ----
+
+#' Custom Knit function for RStudio
+#'
+#' @param input no need to specify anuthing
+#' @param ... Place to add more argument
+#'
+#' @description
+#' Use to add date in the title of the knit markdown document
+#'
+#' @examples
+#' #knit: jofou.lib::knit_with_date
+#'
+#' @export
+knit_with_date <- function(input, ...) {
+  rmarkdown::render(
+    input,
+    output_file = paste0(
+      xfun::sans_ext(input), '-', Sys.Date(), '.',
+      xfun::file_ext(input)
+    ),
+    envir = globalenv()
+  )
+}
