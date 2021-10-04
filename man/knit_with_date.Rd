@@ -7,14 +7,16 @@
 knit_with_date(input, ...)
 }
 \arguments{
-\item{input}{no need to specify anuthing}
+\item{input}{the input file path}
 
-\item{...}{Place to add more argument}
+\item{...}{other arguments passed to rmarkdown::render()}
 }
 \description{
 Use to add date in the title of the knit markdown document
 }
 \examples{
+#---
 #knit: jofou.lib::knit_with_date
+#---
 
 }

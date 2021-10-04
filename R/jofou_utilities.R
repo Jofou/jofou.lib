@@ -54,14 +54,16 @@ calculate_mode <- function(x) {
 
 #' Custom Knit function for RStudio
 #'
-#' @param input no need to specify anuthing
-#' @param ... Place to add more argument
+#' @param input the input file path
+#' @param ... other arguments passed to rmarkdown::render()
 #'
 #' @description
 #' Use to add date in the title of the knit markdown document
 #'
 #' @examples
+#' #---
 #' #knit: jofou.lib::knit_with_date
+#' #---
 #'
 #' @export
 knit_with_date <- function(input, ...) {
