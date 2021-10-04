@@ -62,16 +62,15 @@ calculate_mode <- function(x) {
 #'
 #' @examples
 #' #---
-#' #knit: jofou.lib::knit_with_date
+#' #knit: jofou.lib::knit_with_date_html
 #' #---
 #'
 #' @export
-knit_with_date <- function(input, ...) {
+knit_with_date_html <- function(input, ...) {
   rmarkdown::render(
     input,
     output_file = paste0(
-      xfun::sans_ext(input), '-', Sys.Date(), '.',
-      xfun::file_ext(input)
+      xfun::sans_ext(input), '-', Sys.Date(), '.',"html"
     ),
     envir = globalenv()
   )
