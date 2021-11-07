@@ -31,7 +31,8 @@ Imports:
     timetk,
     extrafont,
     xfun,
-    rmarkdown
+    rmarkdown,
+    rstudioapi
 Suggests: 
     tidyverse,
     knitr,

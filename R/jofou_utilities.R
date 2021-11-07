@@ -75,3 +75,64 @@ knit_with_date_html <- function(input, ...) {
     envir = globalenv()
   )
 }
+
+## 4.0 rle ----
+
+#' Compter le nombre de répétition consécutives
+#'
+#' @param x column name
+#'
+#' @description
+#' Use to count the number of repetition of same string in a dataframe column
+#'
+#' @export
+rle_fx <- function(x) {
+  plain_rle <- rle(x$y)
+  my_df <- data.frame(run_length = plain_rle[[1]],
+                      y = plain_rle[[2]])
+  my_df
+}
+
+## 5.0 Job to render rmd ----
+
+#' Créer une tacher pour rouler les rmd en job
+#'
+#' @description
+#'Use to run rmd on a job
+#'
+#' @export
+render_with_job <- function() {
+  rstudioapi::verifyAvailable()
+
+  job_file <- tempfile(fileext = ".R")
+
+  active_doc_ctx <- rstudioapi::getSourceEditorContext()
+  rmd_path <- active_doc_ctx$path
+
+  if (identical(rmd_path, "")) {
+    rstudioapi::showDialog(
+      "Cannot Render Unsaved R Markdown Document",
+      "Please save the current document before rendering."
+    )
+    return(invisible())
+  }
+
+  rstudioapi::documentSave(active_doc_ctx$id)
+
+  rmd_path <- normalizePath(rmd_path, mustWork = TRUE)
+
+  cat(
+    'res <- rmarkdown::render("', basename(rmd_path), '")\n',
+    'unlink("', job_file, '")\n',
+    'rstudioapi::viewer(res)',
+    sep = "",
+    file = job_file
+  )
+
+  rstudioapi::jobRunScript(
+    path = job_file,
+    name = basename(rmd_path),
+    workingDir = dirname(rmd_path),
+    importEnv = FALSE
+  )
+}
