@@ -21,8 +21,8 @@
 #' @export
 my_inspect_types<- function(df){
   inspectdf::inspect_types(df) %>%
-    knitr::kable(caption = "Types de variables disponibles",
-                 col.names=c("Type","Nombre", "Pourcentage", "Nom des variables"),
+    knitr::kable(caption = "Variables Types",
+                 col.names=c("Type","Nb", "Percentage", "Name"),
                  digits = 0) %>%
     kableExtra::kable_styling(bootstrap_options = c("condensed"), full_width = F, position = "left")
 }
@@ -47,8 +47,8 @@ my_inspect_types<- function(df){
 #' @export
 my_inspect_na<- function(df){
   inspectdf::inspect_na(df) %>%
-    knitr::kable(caption = "Nombre de valeur manquante pour chaque variable",
-                 col.names=c("Nom de la variable","NA", "Pourcentage"),
+    knitr::kable(caption = "Missing Values",
+                 col.names=c("Name","NA", "Percentage"),
                  digits = 0) %>%
     kableExtra::kable_styling(bootstrap_options = c("condensed"), full_width = F, position = "left")
 }
@@ -74,8 +74,8 @@ my_inspect_na<- function(df){
 my_inspect_num<- function(df){
   inspectdf::inspect_num(df) %>%
     dplyr::select(-hist) %>%
-    knitr::kable(caption = "Resume et comparaison des variables numeriques",
-                 col.names=c("Nom de la variable","min", "q1","median", "moyenne", "q3", "max", "sd", "NA (%)"),
+    knitr::kable(caption = "Numeric Variables Summary",
+                 col.names=c("Name","Min", "Q1","Med", "Mean", "Q3", "Max", "SD", "NA (%)"),
                  digits = 0) %>%
     kableExtra::kable_styling(bootstrap_options = c("condensed"), full_width = F, position = "left")
 }
@@ -101,8 +101,8 @@ my_inspect_num<- function(df){
 my_inspect_cor<- function(df){
   inspectdf::inspect_cor(df) %>%
     dplyr::select(-lower, -upper) %>%
-    knitr::kable(caption = "Coeficient de correlation pour toutes les variables numeriques",
-                 col.names=c("Variable 1","Variable 2", "Correlation","Valeur P", "N-NA (%)"),
+    knitr::kable(caption = "Correlation Coefficient",
+                 col.names=c("Variable 1","Variable 2", "Correlation","P Value", "N-NA (%)"),
                  digits = c(4,1,2)) %>%
     kableExtra::kable_styling(bootstrap_options = c("condensed"), full_width = F, position = "left")
 }
@@ -127,8 +127,8 @@ my_inspect_cor<- function(df){
 my_inspect_cat<- function(df){
   inspectdf::inspect_cat(df) %>%
     dplyr::select(-levels) %>%
-    knitr::kable(caption = "Resume et comparaison des variables categoriques",
-                 col.names=c("Nom de la variable","Nombre", "Commun","pourcentage"),
+    knitr::kable(caption = "Categorical Variables",
+                 col.names=c("Name","Nb", "Most Frequent","Percentage"),
                  digits = 0) %>%
     kableExtra::kable_styling(bootstrap_options = c("condensed"), full_width = F, position = "left")
 }
@@ -153,8 +153,8 @@ my_inspect_cat<- function(df){
 #' @export
 my_inspect_imb<- function(df){
   inspectdf::inspect_imb(df) %>%
-    knitr::kable(caption = "Resume des categories les plus utilisees",
-                 col.names=c("Nom de la variable","Categorie", "Pourcentage","Nombre"),
+    knitr::kable(caption = "Most Used Categories",
+                 col.names=c("Name","Category", "Percentage","Nb"),
                  digits = 0) %>%
     kableExtra::kable_styling(bootstrap_options = c("striped","condensed"), full_width = F, position = "left")
 }
@@ -210,7 +210,7 @@ my_num_dist <- function(df, na.rm = TRUE){
       ggplot2::geom_histogram(ggplot2::aes(x = value, y = (..count..)/sum(..count..)),
                      position = "identity", binwidth = 1,
                      fill = "#FFFFFF", color = "black") +
-      ggplot2::ylab("Frequence Relative")+
+      ggplot2::ylab("Relative Frequency")+
       ggplot2::xlab("")+
       ggplot2::labs(title=slices.list[v])+
       ggplot2::theme_minimal()+
